@@ -1,0 +1,30 @@
+<%
+  book = nil if book.nil?
+%>
+
+<li class="grid">
+
+  <% if book %>
+      <%= link_to book_path(book.id) do %>
+          <div class="image">
+            <% if book.image? %>
+                <%= image_tag book.image.url %>
+            <% else %>
+                <div class="empty">No image</div>
+            <% end %>
+          </div>
+      <% end %>
+      <div class="title">
+        <%= book.title %>
+      </div>
+      <div class="info">
+        <div class="bookmark">
+          <%= render 'books/info', book: book %>
+        </div>
+      </div>
+      <div class="grid_footer">
+        <%= render 'books/social_buttons', url: book_url(book.id) %>
+      </div>
+  <% end %>
+
+</li>
