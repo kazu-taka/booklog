@@ -35,6 +35,15 @@ build:
               cat /etc/issue
 
         - script:
+            name: Update packeages
+            code: |
+              sudo apt-get update && sudo apt-get upgrade -y
+
+        - script:
+            name: Install Node.js
+            code: |
+              sudo apt-get install -y nodejs
+        - script:
             name: echo ruby information
             code: |
               echo "ruby version $(ruby --version) running"
