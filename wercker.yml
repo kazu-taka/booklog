@@ -22,17 +22,44 @@ build:
     # http://devcenter.wercker.com/docs/steps/index.html
     steps:
         - script:
+            name: set timezone
+            code: |
+              export TZ="Asia/Tokyo"
+        - script:
+            name: echo timezone
+            code: |
+              date
+        - script:
+            name: Display version
+            code: |
+              cat /etc/issue
+
+        - script:
+            name: Update packeages
+            code: |
+              sudo apt-get update && sudo apt-get upgrade -y
+
+        - script:
+            name: Install Node.js
+            code: |
+              sudo apt-get install -y nodejs
+        - script:
             name: echo ruby information
             code: |
               echo "ruby version $(ruby --version) running"
               echo "from location $(which ruby)"
               echo -p "gem list: $(gem list)"
-
+        - bundle-install:
+            jobs: 4
         - script:
             name: Set up db
             code: |
               bundle exec rake db:migrate RAILS_ENV=test
               bundle exec rake db:seed_fu RAILS_ENV=test
+
+        - script:
+            name: RSpec
+            code: bundle exec rspec --color -f d
     after-steps:
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
