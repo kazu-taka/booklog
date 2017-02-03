@@ -55,7 +55,6 @@ build:
             name: Set up db
             code: |
               bundle exec rake db:migrate RAILS_ENV=test
-              bundle exec rake db:seed_fu RAILS_ENV=test
         - script:
             name: RSpec
             code: bundle exec rspec --color -f d
