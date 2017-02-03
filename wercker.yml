@@ -35,15 +35,6 @@ build:
               cat /etc/issue
 
         - script:
-            name: Update packeages
-            code: |
-              sudo apt-get update && sudo apt-get upgrade -y
-
-        - script:
-            name: Install Node.js
-            code: |
-              sudo apt-get install -y nodejs
-        - script:
             name: echo ruby information
             code: |
               echo "ruby version $(ruby --version) running"
@@ -56,7 +47,6 @@ build:
             code: |
               bundle exec rake db:migrate RAILS_ENV=test
               bundle exec rake db:seed_fu RAILS_ENV=test
-
         - script:
             name: RSpec
             code: bundle exec rspec --color -f d
