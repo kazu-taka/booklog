@@ -62,3 +62,16 @@ build:
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
             channel: slack-test
+deploy:
+    steps:
+        - script:
+            name: Update database
+            code: heroku run rake db:migrate –app $APP_NAME
+        - heroku-deploy:
+            key: $HEROKU_KEY
+            user: $HEROKU_USER
+            app-name: EROKU_APP_NAME
+    after-steps:
+        - wantedly/pretty-slack-notify:
+            webhook_url: $SLACK_WEBHOOK_URL
+            channel: slack-test
