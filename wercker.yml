@@ -68,7 +68,7 @@ deploy:
             install-toolbelt: true
             key: $HEROKU_KEY
             user: $HEROKU_USER
-            app-name: $EROKU_APP_NAME
+            app-name: $HEROKU_APP_NAME
         - script:
             name: Update database
             code: heroku run rake db:migrate –app $APP_NAME
