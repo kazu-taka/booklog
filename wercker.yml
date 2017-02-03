@@ -21,10 +21,18 @@ build:
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
     steps:
-        - bundle-install
         - script:
-            name: rspec
-            code: bundle exec rspec
+            name: echo ruby information
+            code: |
+              echo "ruby version $(ruby --version) running"
+              echo "from location $(which ruby)"
+              echo -p "gem list: $(gem list)"
+
+        - script:
+            name: Set up db
+            code: |
+              bundle exec rake db:migrate RAILS_ENV=test
+              bundle exec rake db:seed_fu RAILS_ENV=test
     after-steps:
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
