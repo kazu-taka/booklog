@@ -64,6 +64,10 @@ build:
             channel: slack-test
 deploy:
     steps:
+        - script:
+            name: echo key
+            code: |
+              echo "heroku-key $(printenv HEROKU_KEY)"
         - heroku-deploy:
             install-toolbelt: true
             key: $HEROKU_KEY
