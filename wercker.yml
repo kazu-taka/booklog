@@ -68,6 +68,9 @@ deploy:
             name: echo key
             code: |
               echo "heroku-key $(printenv HEROKU_KEY)"
+              echo "heroku-key-name $(printenv HEROKU_KEY_PAIR_PUBLIC)"
+              echo "heroku-user $(printenv HEROKU_USER)"
+              echo "heroku-app-name $(printenv HEROKU_APP_NAME)"
         - heroku-deploy:
             install-toolbelt: true
             key: $HEROKU_KEY
