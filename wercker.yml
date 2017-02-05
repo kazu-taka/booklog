@@ -68,8 +68,9 @@ deploy:
             name: echo key
             code: |
               echo "heroku-key $(printenv HEROKU_KEY)"
-              echo "heroku-key-name-private $(printenv HEROKU_KEY_PAIR_PRIVATE)"
-              echo "heroku-key-name $(printenv HEROKU_KEY_PAIR_PUBLIC)"
+              echo "heroku-key-pair $(printenv HEROKU_KEY_PAIR)"
+              echo "heroku-key-private $(printenv HEROKU_KEY_PAIR_PRIVATE)"
+              echo "heroku-key-public $(printenv HEROKU_KEY_PAIR_PUBLIC)"
               echo "heroku-user $(printenv HEROKU_USER)"
               echo "heroku-app-name $(printenv HEROKU_APP_NAME)"
         - heroku-deploy:
